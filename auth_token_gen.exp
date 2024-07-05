@@ -1,0 +1,24 @@
+set executable [lindex $argv 0];
+set secret_file [lindex $argv 1];
+
+set fd [open "$secret_file"]
+set secret [split [read $fd] "\n"]
+set username [lindex $secret 0]
+set password [lindex $secret 1]
+close $fd
+
+set timeout -1
+
+spawn "$executable" -b AuthTokenGen
+expect {
+  -re ".*E-mail Address:" {
+    send -- "$username\r"
+    exp_continue
+  }
+  -re ".*Password:" {
+    send -- "$password\r"
+    exp_continue
+  }
+  eof
+}
+exit [lindex [wait] 3]
