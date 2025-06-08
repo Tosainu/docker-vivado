@@ -13,6 +13,8 @@
 
        $ docker buildx bake config-2024_2  # for Vivado 2024.2
 
+       $ docker buildx bake config-2025_1  # for Vivado 2025.1
+
        $ docker buildx bake config-all  # for all available versions
 
 3. Create `secret.txt` which contains your AMD account information. The first line shall be your E-mail address. The second line shall be the password.
@@ -27,6 +29,8 @@
        $ docker buildx bake --load build-2024_1  # for Vivado 2024.1
 
        $ docker buildx bake --load build-2024_2  # for Vivado 2024.2
+
+       $ docker buildx bake --load build-2025_1  # for Vivado 2025.1
 
        $ docker buildx bake --load build-all  # for all available versions
 
@@ -59,3 +63,15 @@ Assuming you built the container image `vivado:v2024.1`, you can start Vivado by
         -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
         vivado:v2024.1 \
         /bin/bash -c 'cd && . /opt/Xilinx/Vivado/2024.1/settings64.sh && _JAVA_AWT_WM_NONREPARENTING=1 LD_PRELOAD=/lib/x86_64-linux-gnu/libudev.so.1 vivado'
+
+Apparently, they changed the directory structure as of 2025.1. To start Vivado 2025.1 in the same way as above:
+
+    $ docker run \
+        -it \
+        --rm \
+        -e "REUID=$UID" \
+        -e "REGID=$GID" \
+        -e DISPLAY \
+        -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+        vivado:v2025.1 \
+        /bin/bash -c 'cd && . /opt/Xilinx/2025.1/Vivado/settings64.sh && _JAVA_AWT_WM_NONREPARENTING=1 LD_PRELOAD=/lib/x86_64-linux-gnu/libudev.so.1 vivado'
