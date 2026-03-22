@@ -1,5 +1,6 @@
 target "_args-2023_2" {
   args = {
+    BASE_IMAGE = "base-jammy"
     INSTALLER_BIN = "FPGAs_AdaptiveSoCs_Unified_2023.2_1013_2256_Lin64.bin"
     INSTALLER_CONFIG = "config/2023.2/install_config.txt"
   }
@@ -7,6 +8,7 @@ target "_args-2023_2" {
 
 target "_args-2024_1" {
   args = {
+    BASE_IMAGE = "base-jammy"
     INSTALLER_BIN = "FPGAs_AdaptiveSoCs_Unified_2024.1_0522_2023_Lin64.bin"
     INSTALLER_CONFIG = "config/2024.1/install_config.txt"
   }
@@ -14,6 +16,7 @@ target "_args-2024_1" {
 
 target "_args-2024_2" {
   args = {
+    BASE_IMAGE = "base-jammy"
     INSTALLER_BIN = "FPGAs_AdaptiveSoCs_Unified_2024.2_1113_1001_Lin64.bin"
     INSTALLER_CONFIG = "config/2024.2/install_config.txt"
   }
@@ -21,6 +24,7 @@ target "_args-2024_2" {
 
 target "_args-2025_1" {
   args = {
+    BASE_IMAGE = "base-noble"
     INSTALLER_BIN = "FPGAs_AdaptiveSoCs_Unified_SDI_2025.1_0530_0145_Lin64.bin"
     INSTALLER_CONFIG = "config/2025.1/install_config.txt"
   }
@@ -28,6 +32,7 @@ target "_args-2025_1" {
 
 target "_args-2025_2" {
   args = {
+    BASE_IMAGE = "base-noble"
     INSTALLER_BIN = "FPGAs_AdaptiveSoCs_Unified_SDI_2025.2_1114_2157_Lin64.bin"
     INSTALLER_CONFIG = "config/2025.2/install_config.txt"
   }

@@ -1,12 +1,50 @@
-FROM ubuntu:jammy AS base
+ARG BASE_IMAGE="base-noble"
+
+
+FROM ubuntu:noble AS base-noble
 RUN \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-        expect file libgtk2.0-0 libncurses5 libswt-glx-gtk-4-jni libtinfo5 \
-        locales python3 x11-utils xz-utils xvfb && \
+        expect \
+        file \
+        libgtk2.0-0 \
+        libswt-glx-gtk-4-jni \
+        locales \
+        lsb-release \
+        python3 \
+        x11-utils \
+        xvfb \
+        xz-utils \
+    && \
+    rm -rf /var/lib/apt/lists/* && \
+    sed -i 's/^#\s*\(en_US.UTF-8\)/\1/' /etc/locale.gen && \
+    dpkg-reconfigure --frontend noninteractive locales && \
+    userdel -r ubuntu
+
+
+FROM ubuntu:jammy AS base-jammy
+RUN \
+    apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+        expect \
+        file \
+        libgtk2.0-0 \
+        libncurses5 \
+        libswt-glx-gtk-4-jni \
+        libtinfo5 \
+        locales \
+        lsb-release \
+        python3 \
+        x11-utils \
+        xvfb \
+        xz-utils \
+    && \
     rm -rf /var/lib/apt/lists/* && \
     sed -i 's/^#\s*\(en_US.UTF-8\)/\1/' /etc/locale.gen && \
     dpkg-reconfigure --frontend noninteractive locales
+
+
+FROM $BASE_IMAGE AS base
 
 
 FROM base AS installer
