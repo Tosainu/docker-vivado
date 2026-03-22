@@ -26,6 +26,13 @@ target "_args-2025_1" {
   }
 }
 
+target "_args-2025_2" {
+  args = {
+    INSTALLER_BIN = "FPGAs_AdaptiveSoCs_Unified_SDI_2025.2_1114_2157_Lin64.bin"
+    INSTALLER_CONFIG = "config/2025.2/install_config.txt"
+  }
+}
+
 target "_config" {
   dockerfile = "Dockerfile"
   target = "configgen"
@@ -41,6 +48,8 @@ group "config-all" {
     "config-2023_2",
     "config-2024_1",
     "config-2024_2",
+    "config-2025_1",
+    "config-2025_2",
   ]
 }
 
@@ -64,12 +73,18 @@ target "config-2025_1" {
   output = ["type=local,dest=${replace(target._args-2025_1.args.INSTALLER_CONFIG, "/install_config.txt", "")}"]
 }
 
+target "config-2025_2" {
+  inherits = ["_config", "_args-2025_2"]
+  output = ["type=local,dest=${replace(target._args-2025_2.args.INSTALLER_CONFIG, "/install_config.txt", "")}"]
+}
+
 group "build-all" {
   targets = [
     "build-2023_2",
     "build-2024_1",
     "build-2024_2",
     "build-2025_1",
+    "build-2025_2",
   ]
 }
 
@@ -91,4 +106,9 @@ target "build-2024_2" {
 target "build-2025_1" {
   inherits = ["_build", "_args-2025_1"]
   tags = ["vivado:v2025.1"]
+}
+
+target "build-2025_2" {
+  inherits = ["_build", "_args-2025_2"]
+  tags = ["vivado:v2025.2"]
 }

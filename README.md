@@ -15,6 +15,8 @@
 
        $ docker buildx bake config-2025_1  # for Vivado 2025.1
 
+       $ docker buildx bake config-2025_2  # for Vivado 2025.2
+
        $ docker buildx bake config-all  # for all available versions
 
 3. Create `secret.txt` which contains your AMD account information. The first line shall be your E-mail address. The second line shall be the password.
@@ -31,6 +33,8 @@
        $ docker buildx bake --load build-2024_2  # for Vivado 2024.2
 
        $ docker buildx bake --load build-2025_1  # for Vivado 2025.1
+
+       $ docker buildx bake --load build-2025_2  # for Vivado 2025.2
 
        $ docker buildx bake --load build-all  # for all available versions
 
